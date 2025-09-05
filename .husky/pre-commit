@@ -1,0 +1,5 @@
+yarn lint --fix;
+yarn format;
+yarn build;
+yarn test;
+git add ./dist/**
