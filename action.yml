@@ -1,0 +1,36 @@
+name: 'Lock Breaker'
+description: 'Refresh specific packages in yarn.lock file to get latest compatible versions'
+author: 'RateGravity, Inc.'
+branding:
+  icon: 'refresh-cw'
+  color: 'blue'
+
+inputs:
+  packages:
+    description: 'Space-separated list of packages to refresh (e.g., "lodash react react-dom")'
+    required: true
+  directory:
+    description: 'Directory containing the yarn.lock file (default: current directory)'
+    required: false
+    default: '.'
+  commit:
+    description: 'Whether to commit the changes (default: true)'
+    required: false
+    default: 'true'
+  commit-message:
+    description: 'Custom commit message (default: "Refresh {packages} dependencies")'
+    required: false
+  skip-hooks:
+    description: 'Skip git pre-commit hooks (default: true)'
+    required: false
+    default: 'true'
+
+outputs:
+  updated-packages:
+    description: 'List of packages that were updated'
+  commit-sha:
+    description: 'SHA of the commit if changes were committed'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

@@ -1,0 +1,33 @@
+{
+  "name": "lock-breaker-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to refresh specific packages in yarn.lock file",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "github",
+    "action",
+    "yarn",
+    "lock",
+    "dependencies",
+    "refresh"
+  ],
+  "author": "dev@ownup.com",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^6.0.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.3",
+    "esbuild": "^0.25.9",
+    "jest": "^30.1.3"
+  }
+}
