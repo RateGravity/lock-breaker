@@ -127,14 +127,14 @@ async function run() {
 
     // Reinstall dependencies to get fresh versions
     console.log("Running yarn install...");
-    await exec.exec("yarn", ["install"], { cwd: directory });
+    await exec.exec("yarn", ["install", "--no-immutable"], { cwd: directory });
 
     // Commit changes if requested
     let commitSha = "";
     if (shouldCommit) {
       try {
-        // Stage all changes
-        await exec.exec("git", ["add", "."], { cwd: directory });
+        // Stage only yarn.lock file
+        await exec.exec("git", ["add", "yarn.lock"], { cwd: directory });
 
         // Determine commit message
         const finalCommitMessage =

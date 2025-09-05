@@ -122,7 +122,7 @@ describe("Lock Breaker Action", () => {
       // Verify
       expect(mockReadFileSync).toHaveBeenCalledWith("./yarn.lock", "utf8");
       expect(mockWriteFileSync).toHaveBeenCalled();
-      expect(mockExec).toHaveBeenCalledWith("yarn", ["install"], { cwd: "." });
+      expect(mockExec).toHaveBeenCalledWith("yarn", ["install", "--no-immutable"], { cwd: "." });
       expect(mockSetOutput).toHaveBeenCalledWith("updated-packages", "lodash");
       expect(mockSetOutput).toHaveBeenCalledWith("commit-sha", "");
       expect(mockSetFailed).not.toHaveBeenCalled();
@@ -159,7 +159,7 @@ describe("Lock Breaker Action", () => {
 
       // Verify
       expect(mockWriteFileSync).toHaveBeenCalledTimes(2);
-      expect(mockExec).toHaveBeenCalledWith("yarn", ["install"], { cwd: "." });
+      expect(mockExec).toHaveBeenCalledWith("yarn", ["install", "--no-immutable"], { cwd: "." });
       expect(mockSetOutput).toHaveBeenCalledWith(
         "updated-packages",
         "react react-dom",
@@ -196,7 +196,7 @@ describe("Lock Breaker Action", () => {
       await run();
 
       // Verify
-      expect(mockExec).toHaveBeenCalledWith("git", ["add", "."], { cwd: "." });
+      expect(mockExec).toHaveBeenCalledWith("git", ["add", "yarn.lock"], { cwd: "." });
       expect(mockExec).toHaveBeenCalledWith(
         "git",
         ["commit", "-m", "Refresh lodash dependencies", "-n"],
@@ -368,7 +368,7 @@ describe("Lock Breaker Action", () => {
 
       // Verify
       expect(mockWriteFileSync).toHaveBeenCalled();
-      expect(mockExec).toHaveBeenCalledWith("yarn", ["install"], { cwd: "." });
+      expect(mockExec).toHaveBeenCalledWith("yarn", ["install", "--no-immutable"], { cwd: "." });
       expect(mockSetOutput).toHaveBeenCalledWith(
         "updated-packages",
         "@types/node",
@@ -469,7 +469,7 @@ describe("Lock Breaker Action", () => {
         "./custom/path/yarn.lock",
         "utf8",
       );
-      expect(mockExec).toHaveBeenCalledWith("yarn", ["install"], {
+      expect(mockExec).toHaveBeenCalledWith("yarn", ["install", "--no-immutable"], {
         cwd: "./custom/path",
       });
       expect(mockSetFailed).not.toHaveBeenCalled();
